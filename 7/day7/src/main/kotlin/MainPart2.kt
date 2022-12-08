@@ -1,6 +1,7 @@
 import java.io.File
+import java.lang.Math.abs
 
-var list = arrayListOf<String>();
+var listPart2 = arrayListOf<String>();
 
 
 fun main(args: Array<String>) {
@@ -65,6 +66,34 @@ fun main(args: Array<String>) {
 
     }
     var answeranswer: Long = 0
+    var spaceNeeded: Long = 0;
+    var currentSmallestOver: Long = Long.MAX_VALUE
+
+
+
+    var rootsize: Long = 0
+    var allApplicable = map.keys
+    for (cumkey: String in allApplicable) {
+        var fileList = map[cumkey]
+        if (fileList != null) {
+            for (file in fileList) {
+                val size = file.fileSize
+
+                rootsize += size
+
+            }
+        }
+    }
+    println("ROOT DIR SIZE IS: ${rootsize}")
+    val freeSpace = 70000000 - rootsize
+    spaceNeeded = abs(30000000 - freeSpace)
+    println("DELETE FOLDER OF SIZE: $spaceNeeded")
+
+
+
+
+
+
     for ((key, value) in map) {
         var totalSize: Long = 0
         var allApplicable = map.keys.filter { it.startsWith(key)  || it.equals(key) }
@@ -83,6 +112,14 @@ fun main(args: Array<String>) {
         }
 
 
+        if (key.equals("/")) {
+
+        }
+
+
+        if (totalSize > spaceNeeded && totalSize < currentSmallestOver) {
+            currentSmallestOver = totalSize
+        }
         if (totalSize <= 100000) {
             println(totalSize)
 
@@ -90,30 +127,7 @@ fun main(args: Array<String>) {
         }
     }
 
+
+    println("DELETE THIS KEY: $currentSmallestOver")
     println(answeranswer)
 }
-
-fun readFileAsLinesUsingUseLines(fileName: String): ArrayList<String> =
-    File(fileName).useLines { return ArrayList(it.toList()) }
-
-fun distinguishLines(line: String): Line {
-    return when {
-        line.startsWith("$") -> Line("command", line)
-        line.startsWith("dir") -> Line("dir", line)
-        else -> Line("file", line)
-    }
-
-}
-
-class Line constructor(val type: String, val content: String){
-    override fun toString(): String {
-        return "type: $type, content: $content"
-    }
-}
-
-class MyFile constructor(val name: String, val fileSize: Int){
-    override fun toString(): String {
-        return "name: $name, filesize: $fileSize"
-    }
-}
-
