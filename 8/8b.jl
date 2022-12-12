@@ -1,6 +1,3 @@
-
-#julia script
-#calculate how many digits in a grid are larger than all other digits between themsevles and at least one edge of the grid
 function main()
     grid = readlines("input.txt")
     mask = ones(Int32, length(grid), length(grid[1]))
@@ -31,12 +28,10 @@ function main()
             else
                 for l in colindex+1:length(row)
                     if parse(Int, row[l]) >= n
-  
                         mask[rowindex, colindex] *= (l-colindex)
                         break
                     end
                     if l == length(row)
-  
                         mask[rowindex, colindex] *= (l-colindex)
                     end
                 end
@@ -48,11 +43,9 @@ function main()
             else
                 for comparatorRowIndex in rowindex-1:-1:1
                     if parse(Int, grid[comparatorRowIndex][colindex]) >= n
-  
                       mask[rowindex, colindex] *= rowindex - comparatorRowIndex
                       break
                     elseif comparatorRowIndex == rowindex-1
-  
                       mask[rowindex, colindex] *= rowindex - comparatorRowIndex
                     end
                 end      
