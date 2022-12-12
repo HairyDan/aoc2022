@@ -9,3 +9,4 @@ day 5 - lua
 day 6 - bash/shell
 day 7 - kotlin
 day 8 - julia
+day 9 - dart
