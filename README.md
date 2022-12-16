@@ -12,3 +12,4 @@ advent of code 2022
 - day 9 - dart
 - day 10 - c++
 - day 11 - c#
+- day 12 - ruby
