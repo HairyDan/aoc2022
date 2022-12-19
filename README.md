@@ -13,3 +13,4 @@ advent of code 2022
 - day 10 - c++
 - day 11 - c#
 - day 12 - ruby
+- day 13 - scala
